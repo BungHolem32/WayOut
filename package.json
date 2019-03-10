@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "debug": "set DEBUG=wayOut &&  nodemon server/bin/www",
-    "server": "set DEBUG=wayOut &&  nodemon server/bin/www",
+    "debug": "set DEBUG=* &&  nodemon server/bin/www",
+    "server": "set DEBUG=Database* &&  nodemon server/bin/www",
 
     "test": "echo \"Error: no test specified\" && exit 1"
   },

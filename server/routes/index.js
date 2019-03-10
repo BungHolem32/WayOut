@@ -1,9 +1,15 @@
 import express from 'express';
+
+/**
+ *
+ * @type {Router|router}
+ */
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+
+router.get('/',function (request,response) {
+    response.redirect('/network');
 });
 
-module.exports = router;
+
+export default router;
