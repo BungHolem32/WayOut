@@ -13,8 +13,8 @@ const Controller = new NetworkController();
 
 router.get('/', Controller.index);
 router.get('/:id', Controller.show);
-router.post('/', Controller.store);
+router.post('/', Controller.save);
 router.put('/:id', Controller.update);
 router.delete('/:id', Controller.destory);
 
-module.exports = router;
+export default router;

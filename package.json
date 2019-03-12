@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "debug": "set DEBUG=* &&  nodemon server/bin/www",
-    "server": "set DEBUG=Database* &&  nodemon server/bin/www",
-
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server-debug": "set DEBUG=Database* &&  nodemon server/bin/www",
+    "server": "node ./server/bin/www",
+    "client": "node .%AppData%/npm/node_modules@vue/cli-service/bin/vue-cli-service.js serve",
+    "test": "node ./server/node_modules/mocha/bin/mocha --require babel-core/register ./server/test"
   },
   "author": "",
   "license": "ISC"

@@ -3,7 +3,6 @@ import Sequelize from 'sequelize';
 
 const debug = require('debug')('Database:connection');
 
-
 export default class Database {
     constructor() {
         this.connect();
@@ -15,6 +14,7 @@ export default class Database {
             {
                 operatorsAliases: false,
                 host: Database.host, dialect: Database.dialect,
+                port:Database.port,
                 pool: {
                     max: 100,
                     min: 0,
@@ -38,7 +38,7 @@ export default class Database {
      * @returns {string | string}
      */
     static get user() {
-        return process.env.WAY_OUT_USER_NAME;
+        return process.env.WAY_OUT_USER_NAME || 'ilan';
     }
 
     /**
@@ -46,7 +46,7 @@ export default class Database {
      * @returns {string | string}
      */
     static get password() {
-        return process.env.WAY_OUT_PASSWORD;
+        return process.env.WAY_OUT_PASSWORD || 'ilan';
     }
 
     /**
@@ -54,7 +54,7 @@ export default class Database {
      * @returns {string | string}
      */
     static get host() {
-        return process.env.WAY_OUT_HOST;
+        return process.env.WAY_OUT_HOST || 'localhost';
     }
 
     /**
@@ -62,20 +62,18 @@ export default class Database {
      * @returns {string | string}
      */
     static get port() {
-        return process.env.WAY_OUT_DATABASE_PORT;
+        return process.env.WAY_OUT_DATABASE_PORT || 3306;
     }
 
     static get name() {
-        return process.env.WAY_OUT_DATABASE_NAME;
+        return process.env.WAY_OUT_DATABASE_NAME || 'wayout_networks';
     }
 
     static get dialect() {
-        return process.env.WAY_OUT_DIALECT
+        return process.env.WAY_OUT_DIALECT || 'mysql'
     }
 
     static get table() {
         return 'table'
     }
-
-
 }

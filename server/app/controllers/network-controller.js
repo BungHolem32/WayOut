@@ -7,20 +7,10 @@ import NetworkModel from "../models/network";
  */
 export default class NetworkController {
 
+
     constructor() {
         this._instance = (new NetworkModel).model;
     }
-
-    static messages(){
-        let methodToMessage = {
-            'index':'index message','store':'store message','show':'show message','update':'update message','delete':'delete message',
-        };
-
-
-
-        // return methodToMessage[arguments.callee.caller.toString()]
-    }
-
 
     /**
      *
@@ -39,11 +29,11 @@ export default class NetworkController {
      * @returns {function({statusCode?: *, message?: *}, *=): {data: *, message: *, status: *}}
      */
     static get responseObject() {
-        return ({statusCode,message},data) => {
+        return ({message,statusCode,data}) => {
             return {
                 status: statusCode,
-                message: message,
-                data: data,
+                message,
+                data,
             }
         }
     }
@@ -55,11 +45,16 @@ export default class NetworkController {
      * @param response
      */
     index(request, response) {
-        console.log(request.url,request.method);
-        NetworkController.messages();
         NetworkController.model.findAll()
             .then((records) => {
-                response.send(NetworkController.responseObject(response, records));
+                response.message = 'get all network list from db';
+                response.data = records;
+                response.send(NetworkController.responseObject(response));
+            })
+            .catch((err)=> {
+                response.message = err;
+                response.data = null;
+                response.send(NetworkController.response)
             });
     }
 
@@ -73,8 +68,15 @@ export default class NetworkController {
         NetworkController.model
             .findById(request.params.id)
             .then((record) => {
-                response.send(NetworkController.responseObject(response, record));
+                response.message =  `Get record with the id of ` + request.params.id;
+                response.data = record;
+                response.send(NetworkController.responseObject(response));
             })
+            .catch((err)=> {
+                response.message = err;
+                response.data = null;
+                response.send(NetworkController.response)
+            });
     }
 
     /**
@@ -82,12 +84,19 @@ export default class NetworkController {
      * @param request
      * @param response
      */
-    store(request, response) {
+    save(request, response) {
         NetworkController.model
             .save()
             .then((record) => {
-                response.send(NetworkController.responseObject(response, record));
+                response.message =  `Get record with the id of ` + request.params.id;
+                response.data = record;
+                response.send(NetworkController.responseObject(response));
             })
+            .catch((err)=> {
+                response.message = err;
+                response.data = null;
+                response.send(NetworkController.response)
+            });
     }
 
     /**
@@ -96,11 +105,25 @@ export default class NetworkController {
      * @param response
      */
     update(request, response) {
+        const id = request.params.id;
+        let updates = request.body;
+
         NetworkController.model
-            .update()
-            .then((record) => {
-                response.send(NetworkController.responseObject(response, record));
+            .findById(id)
+            .then((model) => {
+                return model.update(updates);
             })
+            .then(record =>{
+                response.data = record;
+                response.message = `record with the id of ${id} updated successfully`;
+                response.send(NetworkController.responseObject(response))
+            })
+            .catch((err)=> {
+                response.message = err;
+                response.data = null;
+                response.send(NetworkController.response)
+            });
+
     }
 
     /**
@@ -113,8 +136,15 @@ export default class NetworkController {
         NetworkController.model
             .destroy({where: {id: id}})
             .then(() => {
-                response.send(`record with ${id} was deleted successfully`);
+                response.data = null;
+                response.message = `record with the id of ${id} updated successfully`;
+                response.send(NetworkController.responseObject(response));
             })
+            .catch((err)=> {
+                response.message = err;
+                response.data = null;
+                response.send(NetworkController.response)
+            });
     }
 }
 

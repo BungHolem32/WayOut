@@ -8,7 +8,7 @@ const router = express.Router();
 
 
 router.get('/',function (request,response) {
-    response.redirect('/network');
+    response.redirect('/api/network');
 });
 
 

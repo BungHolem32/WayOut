@@ -6,14 +6,16 @@ module.exports = {
         password: 'ilan',
         database: 'wayout_networks',
         host: '127.0.0.1',
-        dialect: 'mysql'
+        dialect: 'mysql',
+        port:'3306',
     },
     test: {
-        username: 'database_test',
-        password: null,
-        database: 'database_test',
+        username: 'ilan',
+        password: 'ilan',
+        database: 'way_out_networks',
         host: '127.0.0.1',
-        dialect: 'mysql'
+        dialect: 'mysql',
+        port:'3306'
     },
     production: {
         username: 'ilan',
