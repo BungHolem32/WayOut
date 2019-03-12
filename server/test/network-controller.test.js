@@ -22,7 +22,6 @@ describe('Network Crud', () => {
                     expect(res.statusCode).to.equal(200);
                     expect(res.body).to.be.an('array');
                     done();
-
                 })
         });
         it('Should get Specific record', (done) => {

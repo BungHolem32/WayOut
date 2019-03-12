@@ -7,8 +7,9 @@
     "debug": "set DEBUG=* &&  nodemon server/bin/www",
     "server-debug": "set DEBUG=Database* &&  nodemon server/bin/www",
     "server": "node ./server/bin/www",
-    "client": "node .%AppData%/npm/node_modules@vue/cli-service/bin/vue-cli-service.js serve",
-    "test": "node ./server/node_modules/mocha/bin/mocha --require babel-core/register ./server/test"
+    "client-dev": "node .%AppData%/npm/node_modules@vue/cli-service/bin/vue-cli-service.js serve",
+    "test":  "node ./server/node_modules/mocha/bin/mocha --require babel-core/register ./server/test",
+    "client": "node ./client/node_modules/serve/bin/serve.js -s ./client/dist"
   },
   "author": "",
   "license": "ISC"
