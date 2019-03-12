@@ -33,16 +33,22 @@ User should be able to:
 -  clone project https://github.com/BungHolem32/WayOut.git
 -  open terminal
 -  cd into project-folder` cd projectFolder`
--  create `.env` file according to the `.env.example` and change to variables to your db connection 
+-  create `.env` file according to the `.env.example` and 
 ````
 PORT=5000
 WAY_OUT_DATABASE_NAME=wayout_networks
-WAY_OUT_USER_NAME=ilan
-WAY_OUT_PASSWORD=ilan
+WAY_OUT_USER_NAME=test
+WAY_OUT_PASSWORD=test
 WAY_OUT_HOST=localhost
 WAY_OUT_DIALECT=mysql
 WAY_OUT_DATABASE_PORT=3306
+WAY_OUT_DATABASE_PORT=3306
 ````
+ 
+ The above related to the configuration that includes in the dockerfile inside `dockerized_database` . 
+ feel free to use it or type mysql server of your own.
+ 
+p.s: table name must be `networks`
 
 - cd into server `cd server` 
 - type `npm install`
@@ -75,6 +81,26 @@ you should see some thing like that
    │                                                  │
    └──────────────────────────────────────────────────┘
 ````
- enter one of the urls like that `http://localhost:58457/networks`
+ enter one of the urls like that [http://localhost:58457/networks]
  
  enter one of these urls and if everything worked as expected you should see the network list
+ 
+  
+ Docker Mysql Server Installation:
+ 
+- Open terminal 
+- install docker according to the following details: [https://www.docker.com/get-started]
+- cd into dockerized_database cd `dockerized_database`
+- type `docker build -t test-mysql .`
+- type `docker run -d -p 3306:3306 --name test-mysql -e MYSQL_ROOT_PASSWORD=root test-mysql`
+- then you could enter to the database with the following details:
+
+``` 
+ user => test
+ password => test
+ port => 3306
+ ```
+
+
+
+
